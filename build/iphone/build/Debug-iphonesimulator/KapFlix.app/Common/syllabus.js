@@ -1,0 +1,1 @@
+/Users/jcorales/Projects/Git/hackathon2013/InteractiveVideo/Resources/Common/syllabus.js

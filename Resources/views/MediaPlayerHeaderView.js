@@ -1,3 +1,5 @@
+var utils = require('/Common/utils');
+
 MediaPlayerHeaderView = function(){
 	var self = this;
 	return self;
@@ -7,11 +9,11 @@ MediaPlayerHeaderView.prototype.init = function(){
 	var self = this;
 	
 	self.view = Ti.UI.createView({
-		height: 45,
+		height: utils.isiOS7() ? 45 : 20,
 		width: '100%',
-		backgroundColor: '#b9b5b9',
+		backgroundColor: utils.isiOS7() ? '#b9b5b9' : '#000000',
 		opacity: 0.6,
-		top: 0,
+		top: utils.isiOS7() ? 0 : 20,
 		left: 0
 	});
 	
@@ -27,9 +29,9 @@ MediaPlayerHeaderView.prototype.initDisplay = function(){
 		width: '100%',
 		backgroundColor: 'transparent',
 		height: 20,
-		top: 20,
+		top: utils.isiOS7() ? 20 : 0,
 		left: 0,
-		color: '#000',
+		color: utils.isiOS7() ? '#000' : '#fff',
 		textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
 	});	
 	
@@ -38,9 +40,9 @@ MediaPlayerHeaderView.prototype.initDisplay = function(){
 	self.doneLabel = Ti.UI.createLabel({
 		width: 50,
 		height: 20,
-		top: 20,
+		top: utils.isiOS7() ? 20 : 0,
 		left: 5,
-		color: '#000'
+		color: utils.isiOS7() ? '#000' : '#fff'
 	});
 	
 	self.doneLabel.text = "Done";

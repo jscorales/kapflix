@@ -1,3 +1,5 @@
+var utils = require('/Common/utils');
+
 var parentWin = null;
 SectionView = function(parent){
 	var self = this;
@@ -13,7 +15,8 @@ SectionView.prototype.init = function(){
 		backgroundColor: '#fff',	
 		height: Ti.Platform.displayCaps.platformHeight,
 		width: Ti.Platform.displayCaps.platformWidth,
-		left: 190
+		left: 190,
+		top: utils.isiOS7() ? 10 : 0
 	});
 
    self.headerView = Ti.UI.createView({	

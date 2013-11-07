@@ -6,6 +6,7 @@ var SectionView = require('/views/SectionView').SectionView;
 var ItemView = require('/views/ItemView').ItemView;
 var LoadingView = require('/views/LoadingView').LoadingView;
 var ReportView = require('/views/ReportView').ReportView;
+var utils = require('/Common/utils');
 
 ApplicationWindow = function(){
 	var self = this;
@@ -24,6 +25,9 @@ ApplicationWindow.prototype.init = function(){
 	});
 	
 	self.initMainView();
+	if (utils.isiOS7())
+		self.window.statusBarStyle =  Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT;
+	
 	self.window.open();
 };
 
@@ -46,6 +50,9 @@ ApplicationWindow.prototype.initMainView = function(){
 	self.mainView.view.left = -190;
 	
 	self.mainView.view.add(self.headerView.view);
+	
+	
+	
    	self.window.add(self.mainView.view);
    	
    	
@@ -104,6 +111,25 @@ ApplicationWindow.prototype.initHeaderView = function(){
 	  		
 	  	}
 	  }
+	  
+	  self.mainView.view.addEventListener('swipe', function(e){
+		switch (e.direction){
+			case 'left':
+				if (self.isMenuOpen){
+					self.mainView.view.animate(self.closeMenuAnimation);
+					self.isMenuOpen = false;
+					
+				}
+				
+				break;
+			case 'right':
+				if (!self.isMenuOpen){
+					self.mainView.view.animate(self.openMenuAnimation);
+					self.isMenuOpen = true;
+				}
+				break;
+		}	
+	});
 	  
 	});
 };
@@ -174,7 +200,7 @@ ApplicationWindow.prototype.initItemView = function(itemType){
 	self.itemView = new ItemView(self);	
 	self.itemView.init(itemType);
 	
-	self.itemView.view.top = 50;
+	self.itemView.view.top = utils.isiOS7() ? 60 : 50;
 	self.itemView.view.addEventListener('showReport', function(e){
 		self.initReportView(true);
 		e.mediaPlayerWindow.window.close();
@@ -192,7 +218,7 @@ ApplicationWindow.prototype.initReportView = function(fromItemView){
 	self.reportView = new ReportView();	
 	self.reportView.init();
 	
-	self.reportView.view.top = 50;
+	self.reportView.view.top = utils.isiOS7() ? 60 : 50;
 	self.mainView.view.left = -190;
 	self.mainView.view.add(self.reportView.view);
 	self.headerView.setMenuButtonImage("btn_home");

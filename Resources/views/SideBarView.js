@@ -1,4 +1,5 @@
 var syllabus = require('/Common/syllabus').syllabus;
+var utils = require('/Common/utils');
 
 SideBarView = function(){
 	var self = this;
@@ -32,7 +33,7 @@ SideBarView.prototype.initItemView = function(){
 		width: '100%',
 		height: '100%',
 		layout: 'vertical',
-		top: 10,
+		top: utils.isiOS7() ? 20 : 10,
 		left: 0
 	});
 	

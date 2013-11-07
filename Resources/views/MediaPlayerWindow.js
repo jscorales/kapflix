@@ -1,9 +1,10 @@
 var MediaPlayerHeaderView = require('/views/MediaPlayerHeaderView').MediaPlayerHeaderView;
 var MediaPlayerFooterView = require('/views/MediaPlayerFooterView').MediaPlayerFooterView;
+var utils = require('/Common/utils');
+
 var videoControlTimeout = null;
 var _headerView = null;
 var _footerView = null;
-var _windowInitialized = false;
 
 MediaPlayerWindow = function(){
 	var self = this;
@@ -14,6 +15,7 @@ MediaPlayerWindow = function(){
 	self.checkDuration = false;
 	self.hotspots = [];
 	self.timer = null;
+	self.windowInitialized = false;
 	
 	return self;
 };
@@ -26,15 +28,17 @@ MediaPlayerWindow.prototype.init = function(item){
 		backgroundColor:'#000',
 		orientationModes:[Ti.UI.LANDSCAPE_LEFT],
 		width: '100%',
-		height: '100%',
-		top:0,
+		height: self.windowInitialized ? Ti.Platform.displayCaps.platformHeight : Ti.Platform.displayCaps.platformWidth,
+		top:utils.isiOS7() ? 0 : -20,
+		bottom: 0,
 		left:0
 	});
 	
+	if (!utils.isiOS7())
+		Ti.UI.iPhone.statusBarStyle = Ti.UI.iPhone.StatusBar.TRANSLUCENT_BLACK;
+		
 	self.initVideoPlayer();
 	self.getVideoHotspotsData(self.item.url, MediaPlayerWindow.prototype.videoHotspotsDataReceived);
-	
-	
 };
 
 MediaPlayerWindow.prototype.showVideoControls = function(){
@@ -44,11 +48,11 @@ MediaPlayerWindow.prototype.showVideoControls = function(){
 		clearTimeout(videoControlTimeout);
 	
 	Titanium.UI.iPhone.showStatusBar({animationStyle: Ti.UI.iPhone.StatusBar.ANIMATION_STYLE_NONE});
-	_headerView.view.show();
+	self.headerView.view.show();
 	//_footerView.view.show();
 	
 	videoControlTimeout = setTimeout(function(){
-		_headerView.view.hide();
+		self.headerView.view.hide();
 		Titanium.UI.iPhone.hideStatusBar({animationStyle: Ti.UI.iPhone.StatusBar.ANIMATION_STYLE_NONE});
 		
 		//_footerView.view.hide();
@@ -74,7 +78,7 @@ MediaPlayerWindow.prototype.initVideoPlayer = function(){
 		//scalingMode:Titanium.Media.VIDEO_SCALING_ASPECT_FIT,
 		autoplay:true,
 		fullscreen:false,
-		top: 0, //25,
+		top: 0,
 		//bottom: 20,
 		parentObj: self
 	});
@@ -99,11 +103,15 @@ MediaPlayerWindow.prototype.videoHotspotsDataReceived = function(context, hotspo
 	if (self.item.id !== '1') //multiple choice
 		self.initInteractions(hotspots); 
 	
-	if (!_windowInitialized){
+	if (!self.windowInitialized){
 		self.initHeaderView();
 		//self.initFooterView();
-		self.window.open();
-		_windowInitialized = true;
+		if (utils.isiOS7())
+			self.window.open();
+		else
+			self.window.open({modal: true});
+		self.windowInitialized = true;
+		self.showVideoControls();
 	}
 };
 
@@ -123,11 +131,11 @@ MediaPlayerWindow.prototype.getVideoHotspotsData = function(videoUrl, callback){
 		},
 		onerror: function(e){
 			if (callback)
-				callback();
+				callback(self);
 		}
 	});
 	
-	httpClient.open('GET', 'http://kapflix-author.herokuapp.com/stubxml/' + videoName);
+	httpClient.open('GET', 'http://kapflix-author.herokuapp.com/xml/' + videoName);
 	httpClient.send();
 };
 
@@ -269,7 +277,10 @@ MediaPlayerWindow.prototype.initHeaderView = function(){
 	self.headerView.label.text = 'Q' + self.item.id + '.  ' + self.item.videoTitle;
 	
 	self.headerView.doneLabel.addEventListener('click', function(e){
-		self.window.close();	
+		self.windowInitialized = false;
+		clearTimeout(videoControlTimeout);
+		self.window.close();
+		Titanium.UI.iPhone.showStatusBar({animationStyle: Ti.UI.iPhone.StatusBar.ANIMATION_STYLE_NONE});
 	});
 	
 	self.window.add(self.headerView.view);	
@@ -459,7 +470,7 @@ MediaPlayerWindow.prototype.initInteractions = function(hotspots){
 			var height = 0;
 			var width = 0;
 			
-			if (_windowInitialized){
+			if (self.windowInitialized){
 				height = parseInt((parseFloat(hotspot.coordinates.height) / Ti.Platform.displayCaps.platformHeight) * 100).toString() + '%';
 				width = parseInt((parseFloat(hotspot.coordinates.width) / Ti.Platform.displayCaps.platformWidth) * 100).toString() + '%';
 			}
@@ -492,6 +503,8 @@ MediaPlayerWindow.prototype.initInteractions = function(hotspots){
 					clearInterval(self.timer);
 					
 					if (view.videoUrl == '/Common/videos/home'){
+						self.windowInitialized = false;
+						Titanium.UI.iPhone.showStatusBar({animationStyle: Ti.UI.iPhone.StatusBar.ANIMATION_STYLE_NONE});
 						self.window.fireEvent('showReport', {});
 					}
 					else{
@@ -658,6 +671,8 @@ MediaPlayerWindow.prototype.initFooterView = function(){
 	self.footerView.init();
 	
 	self.footerView.backButton.addEventListener('click', function(e){
+		self.windowInitialized = false;
+		clearTimeout(videoControlTimeout);
 		self.window.close();	
 	});
 	

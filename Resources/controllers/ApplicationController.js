@@ -39,6 +39,8 @@ ApplicationController.prototype.initApp = function(){
 		self.isMediaPlayerOpen = true;
 		self.mediaPlayerWindow.window.addEventListener('showReport', function(e){
 			self.appWindow.initReportView();
+			self.mediaPlayerWindow.windowInitialized = false;
+			Titanium.UI.iPhone.showStatusBar({animationStyle: Ti.UI.iPhone.StatusBar.ANIMATION_STYLE_NONE});
 			self.mediaPlayerWindow.window.close();
 		});
 	});

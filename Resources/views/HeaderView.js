@@ -1,3 +1,5 @@
+var utils = require('/Common/utils');
+
 HeaderView = function(){
 	var self = this;
 	
@@ -8,7 +10,7 @@ HeaderView.prototype.init = function(){
 	var self = this;
 	
 	self.view = Ti.UI.createView({
-		height: 50,
+		height: utils.isiOS7() ? 60 : 50,
 		backgroundColor: '#49a942',
 		width: Ti.Platform.displayCaps.platformWidth,
 		top: 0,
@@ -25,7 +27,7 @@ HeaderView.prototype.initComponents = function(){
 	
 	//menuButton
 	self.menuButton = Ti.UI.createView({
-		top: 20,
+		top: utils.isiOS7() ? 30 : 20,
 		left: 10,
 		height: 20,
 		width: 25,
@@ -66,7 +68,7 @@ HeaderView.prototype.initComponents = function(){
 HeaderView.prototype.setMenuButtonImage = function(imageName){
 	var self = this;
 	self.menuButton.backgroundImage = "/Common/images/" + imageName + ".png";
-	
+	/*
 	if (imageName === 'btn_home'){
 		self.menuButton.height = 25;
 		self.menuButton.top = 18;
@@ -74,7 +76,7 @@ HeaderView.prototype.setMenuButtonImage = function(imageName){
 	else{
 		self.menuButton.height = 20;
 		self.menuButton.top = 20;
-	}
+	}*/
 };
 
 HeaderView.prototype.setLabel = function(labelText){

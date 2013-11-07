@@ -21,7 +21,7 @@ var syllabus = {
           "id": "2",
           "type": "sectionItem",
           "title": "Arithmetic",
-          "url": "/Common/videos/Question1.m4v",
+          "url": "/Common/videos/question1.mp4",
           "image":"Thumb_02",
           "description":"Arithmetic questions designed to build a strong foundation in the basic math skills.",
           "videoTitle":"Arithmetic - Problem Solving"
@@ -30,7 +30,7 @@ var syllabus = {
           "id": "3",
           "type": "sectionItem",
           "title": "Number Properties",
-          "url": "/Common/videos/Question1.m4v",
+          "url": "/Common/videos/question1.mp4",
            "image":"Thumb_03",
           "description":"Review Number Properties concepts and examine how they might appear on Test Day. ",
           "videoTitle":"Number Properties"
@@ -39,7 +39,7 @@ var syllabus = {
           "id": "4",
           "type": "sectionItem",
           "title": "Proportions",
-          "url": "/Common/videos/Question1.m4v",
+          "url": "/Common/videos/question1.mp4",
           "image":"Thumb_04",
           "description":"Learn Kaplan's strategies and give yourself ample practice with Proportions questions.",
           "videoTitle":"Proportions"
@@ -48,7 +48,7 @@ var syllabus = {
           "id": "5",
           "type": "sectionItem",
           "title": "Math Formulas",
-          "url": "/Common/videos/Question1.m4v",
+          "url": "/Common/videos/question1.mp4",
           "image":"Thumb_05",
           "description":"Classic formulas that will appear on your test: rates, averages, and combinations.",
           "videoTitle":"Math Formulas"
@@ -65,7 +65,7 @@ var syllabus = {
           "id": "6",
           "type": "sectionItem",
           "title": "Verbal Strategy",
-          "url": "/Common/videos/Question1.m4v",
+          "url": "/Common/videos/question1.mp4",
           "image":"Thumb_01",
           "description":"Verbal Strategy",
           "videoTitle":"Verbal Strategy"
@@ -74,7 +74,7 @@ var syllabus = {
           "id": "7",
           "type": "sectionItem",
           "title": "Critical Reasoning",
-          "url": "/Common/videos/Question1.m4v",
+          "url": "/Common/videos/question1.mp4",
           "image":"Thumb_02",
           "description":"Critical Reasoning",
           "videoTitle":"Critical Reasoning"
@@ -83,7 +83,7 @@ var syllabus = {
           "id": "8",
           "type": "sectionItem",
           "title": "Reading Comprehension",
-          "url": "/Common/videos/Question1.m4v",
+          "url": "/Common/videos/question1.mp4",
            "image":"Thumb_03",
           "description":"Reading Comprehension",
           "videoTitle":"Reading Comprehension"
@@ -92,7 +92,7 @@ var syllabus = {
           "id": "9",
           "type": "sectionItem",
           "title": "Strategic Reading",
-          "url": "/Common/videos/Question1.m4v",
+          "url": "/Common/videos/question1.mp4",
           "image":"Thumb_04",
           "description":"Strategic Reading",
           "videoTitle":"Strategic Reading"

@@ -1,7 +1,7 @@
 var parentWin = null;
 SectionView = function(parent){
 	var self = this;
-    parentWin = parent
+    parentWin = parent;
 	return self;
 };
 

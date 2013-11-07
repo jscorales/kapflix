@@ -1,6 +1,6 @@
 (function(){
 
-Ti.UI.iPhone.setStatusBarStyle(Titanium.UI.iPhone.StatusBar.TRANSLUCENT_BLACK);
+//Ti.UI.iPhone.setStatusBarStyle(Titanium.UI.iPhone.StatusBar.TRANSLUCENT_BLACK);
 var ApplicationController = require('/controllers/ApplicationController').ApplicationController;
 
 //var LoginController = require('/controllers/LoginController').LoginController;

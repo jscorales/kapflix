@@ -4,7 +4,7 @@ var syllabus = require('/Common/syllabus').syllabus;
 ItemView = function(parent) {
 	var self = this;
 	self.isMediaPlayerOpen = false;
-	parentWin = parent
+	parentWin = parent;
 	return self;
 };
 

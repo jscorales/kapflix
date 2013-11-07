@@ -1,7 +1,7 @@
 
 ReportView = function(parent) {
 	var self = this;
-	self.parentWin = parent
+	self.parentWin = parent;
 	return self;
 };
 

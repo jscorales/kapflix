@@ -30,4 +30,4 @@ LoadingView.prototype.init = function(){
 
 };
 
-exports.LoadingView = LoadingView
+exports.LoadingView = LoadingView;

@@ -44,7 +44,7 @@ SideBarView.prototype.initItems = function(){
 	
 	for (var i = 0; i < syllabus.sections.length; i++){
 		var section = syllabus.sections[i];
-		var sectionLabel = self.createSectionLabel(section)
+		var sectionLabel = self.createSectionLabel(section);
 		self.itemView.add(sectionLabel);
 		
 		for (var j=0; j < section.sectionItems.length; j++){
